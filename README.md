@@ -33,3 +33,8 @@ Segregation means part your interfaces into small sections of abstraction. Follo
 
 #### Dependency Inversion Principle (DIP)
 
+It's basically that high classes and low classes should not depends to each other. They should depends from an abstraction. 
+
+This way, your system could easily be changed by injecting diferents classes that implements the same protocol.
+
+Here, we can also see the pattern dependency injection, which could be implemented by different ways.
