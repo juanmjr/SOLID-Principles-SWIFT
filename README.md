@@ -11,6 +11,86 @@ Systems present a nice clean code and turn an easy way to change and build throu
 
 It says that a class must have ONE reason to make something. That's why, you should have to think about to abstract responsibilities between your system's classes.
 
+```swift
+protocol IBuyer {
+    func buy(crypto: ICripto, id: String)
+}
+
+protocol ISeller {
+    func sell(crypto: ICripto, id: String)
+}
+
+protocol IExchange {
+    var wallets: [IWallet] { get }
+    func find(id: String) -> IWallet?
+}
+
+// I'm an exchange and I only do operations Buy/Sell into a wallet list
+struct Exchange: IExchange, IBuyer, ISeller {
+    var wallets: [IWallet]
+    
+    init(wallets: [IWallet]) {
+        self.wallets = wallets
+    }
+    
+    func find(id: String) -> IWallet? {
+        return wallets.first(where: {$0.id == id})
+    }
+
+    func buy(crypto: ICripto, id: String) {
+        if var input = find(id: id) {
+            input.add(crypto: crypto)
+        }
+    }
+    
+    func sell(crypto: ICripto, id: String) {
+        if var input = find(id: id) {
+            input.remove(crypto: crypto)
+        }
+    }
+}
+
+protocol IWallet {
+    var id: String { get }
+    var cryptos: [ICripto] { get }
+    mutating func add(crypto: ICripto)
+    mutating func remove(crypto: ICripto)
+}
+
+// I'm a wallet and I only know how to manage a crypto list.
+struct Wallet: IWallet {
+    var id: String
+    var cryptos: [ICripto]
+    
+    init(id: String) {
+        self.id = id
+        self.cryptos = []
+    }
+    
+    mutating func add(crypto: ICripto) {
+        cryptos.append(crypto)
+    }
+    
+    mutating func remove(crypto: ICripto) {
+        if let index = cryptos.firstIndex(where: {$0.id == crypto.id}) {
+            cryptos.remove(at: index)
+        }
+    }
+}
+
+protocol ICripto {
+    var id: String { get }
+    var name: String { get }
+}
+
+// I'm a crypto model
+struct Crypto: ICripto {
+    var id: String
+    var name: String
+}
+
+```
+
 #### Open Close Principle (OCP) 
 
 It says that you should not modify your class inside. You should create extensions and change it by out-side. 
