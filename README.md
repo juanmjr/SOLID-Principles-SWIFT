@@ -220,6 +220,10 @@ Don't create long interfaces or even functions that would not being used on impl
 
 Segregation means part your interfaces into small sections of abstraction. Following it would be the easiest way to conquer this principle :)
 
+```swift
+
+```
+
 #### Dependency Inversion Principle (DIP)
 
 It's basically that high classes and low classes should not depends to each other. They should depends from an abstraction. 
@@ -227,3 +231,46 @@ It's basically that high classes and low classes should not depends to each othe
 This way, your system could easily be changed by injecting diferents classes that implements the same protocol.
 
 Here, we can also see the pattern dependency injection, which could be implemented by different ways.
+
+```swift
+
+protocol IFormatterMask {
+    func format(input: String) -> String
+}
+
+protocol IFormatter {
+    var formatter: IFormatterMask { get }
+    func execute(input: String) -> String
+}
+
+struct Formatter: IFormatter {
+    var formatter: IFormatterMask
+    
+    func execute(input: String) -> String {
+        return formatter.format(input: input)
+    }
+}
+
+struct FormatterNumber: IFormatterMask {
+    func format(input: String) -> String {
+        var result = input
+        if input.count == 8 {
+            result.insert("-", at: result.index(result.startIndex, offsetBy: 4))
+        }
+        return result
+    }
+}
+
+struct FormatterPhone: IFormatterMask {
+    func format(input: String) -> String {
+        var result = input
+
+        if input.count == 9 {
+            result.insert("-", at: result.index(result.startIndex, offsetBy: 6))
+        }
+        
+        return result
+    }
+}
+
+```
