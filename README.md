@@ -4,7 +4,7 @@ You must install xcodegen to generate .xcodeproj to run the sample project.
 
 More infos at: https://github.com/yonaskolb/XcodeGen
 
-Run cmd 'xcodegen' in terminal at root project sample folder (where .yaml file is).
+Run cmd 'xcodegen' in terminal at root project sample folder (where .yml file is).
 
 # S.O.L.I.D. 
 ### The Principles of acronym OOD (object-oriented design) by Robert C. Martin 
