@@ -151,6 +151,69 @@ A simple easy example is a DOG class inheritances a CAT class, just because they
  
 As a conclusion fact, Liskov Principle gives us an alert! Don't simple use a inheritance because it seens nice or you think reuse just some functions. Besides, be fascinate with usage of protocols and a good abstraction than inheritances.
 
+```swift
+
+import UIKit
+
+protocol IBaseLoading {
+    var loadingIndicator: UIActivityIndicatorView? { get }
+    func showLoadingIndicator(view: UIView)
+    func hideLoadingIndicator()
+}
+
+protocol IBaseNavigationProtocol {
+    var navigationTitle: String? { get }
+    func setNavigation()
+}
+
+class BaseViewController: UIViewController, IBaseLoading, IBaseNavigationProtocol {
+    var loadingIndicator: UIActivityIndicatorView?
+    var navigationTitle: String?
+    
+    func showLoadingIndicator(view: UIView) {
+        if let loadingIndicator = loadingIndicator {
+            view.addSubview(loadingIndicator)
+            loadingIndicator.startAnimating()
+        }
+    }
+    
+    func hideLoadingIndicator() {
+        if let loadingIndicator = loadingIndicator {
+            loadingIndicator.stopAnimating()
+            loadingIndicator.removeFromSuperview()
+        }
+    }
+    
+    func setNavigation() {
+        self.navigationController?.navigationBar.tintColor = .red
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+        self.title = navigationTitle
+    }
+}
+
+protocol IMyViewController {
+    func setup()
+}
+
+final class MyViewController: BaseViewController, IMyViewController {
+    
+    func setup() {
+        loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator?.color = .red
+        navigationTitle = "Hi World :)"
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setup()
+        setNavigation()
+    }
+}
+
+```
+
 #### Interface Segregation Principle (ISP)
 
 Don't create long interfaces or even functions that would not being used on implementation class.
