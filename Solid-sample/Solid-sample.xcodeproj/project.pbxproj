@@ -20,6 +20,10 @@
 		E414264A286156D900621B1B /* SRPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4142649286156D900621B1B /* SRPView.swift */; };
 		E414264C286156E900621B1B /* SRPInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E414264B286156E900621B1B /* SRPInteractor.swift */; };
 		E414264E286156F800621B1B /* SRPPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E414264D286156F800621B1B /* SRPPresenter.swift */; };
+		E4A978DE2862A3FF0063668D /* NetworkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A978DB2862A3FF0063668D /* NetworkLog.swift */; };
+		E4A978DF2862A3FF0063668D /* AnalyticsLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A978DC2862A3FF0063668D /* AnalyticsLog.swift */; };
+		E4A978E02862A3FF0063668D /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A978DD2862A3FF0063668D /* Log.swift */; };
+		E4A978E22862A4080063668D /* README-OCP.md in Resources */ = {isa = PBXBuildFile; fileRef = E4A978E12862A4080063668D /* README-OCP.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,10 @@
 		E4142649286156D900621B1B /* SRPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRPView.swift; sourceTree = "<group>"; };
 		E414264B286156E900621B1B /* SRPInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRPInteractor.swift; sourceTree = "<group>"; };
 		E414264D286156F800621B1B /* SRPPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRPPresenter.swift; sourceTree = "<group>"; };
+		E4A978DB2862A3FF0063668D /* NetworkLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkLog.swift; path = "Solid-sample/Scenes/OCP/Model/NetworkLog.swift"; sourceTree = SOURCE_ROOT; };
+		E4A978DC2862A3FF0063668D /* AnalyticsLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyticsLog.swift; path = "Solid-sample/Scenes/OCP/Model/AnalyticsLog.swift"; sourceTree = SOURCE_ROOT; };
+		E4A978DD2862A3FF0063668D /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = "Solid-sample/Scenes/OCP/Model/Log.swift"; sourceTree = SOURCE_ROOT; };
+		E4A978E12862A4080063668D /* README-OCP.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = "README-OCP.md"; path = "Solid-sample/Scenes/OCP/README-OCP.md"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,10 +156,31 @@
 		E41426462861554E00621B1B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E4A978D32862A3AF0063668D /* OCP */,
 				E4142642286154D100621B1B /* Sample */,
 				E41426362861527500621B1B /* SRP */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		E4A978D32862A3AF0063668D /* OCP */ = {
+			isa = PBXGroup;
+			children = (
+				E4A978E12862A4080063668D /* README-OCP.md */,
+				E4A978DA2862A3C00063668D /* Model */,
+			);
+			name = OCP;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		E4A978DA2862A3C00063668D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E4A978DC2862A3FF0063668D /* AnalyticsLog.swift */,
+				E4A978DD2862A3FF0063668D /* Log.swift */,
+				E4A978DB2862A3FF0063668D /* NetworkLog.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E414262F2861527000621B1B /* LaunchScreen.storyboard in Resources */,
+				E4A978E22862A4080063668D /* README-OCP.md in Resources */,
 				E414262C2861527000621B1B /* Assets.xcassets in Resources */,
 				E414262A2861526F00621B1B /* Main.storyboard in Resources */,
 			);
@@ -227,7 +257,9 @@
 			files = (
 				E414264A286156D900621B1B /* SRPView.swift in Sources */,
 				E414263C286153FB00621B1B /* Wallet.swift in Sources */,
+				E4A978E02862A3FF0063668D /* Log.swift in Sources */,
 				E41426272861526F00621B1B /* ViewController.swift in Sources */,
+				E4A978DF2862A3FF0063668D /* AnalyticsLog.swift in Sources */,
 				E414263A286153CE00621B1B /* Crypto.swift in Sources */,
 				E41426232861526F00621B1B /* AppDelegate.swift in Sources */,
 				E41426252861526F00621B1B /* SceneDelegate.swift in Sources */,
@@ -235,6 +267,7 @@
 				E414263E2861541800621B1B /* Exchange.swift in Sources */,
 				E414264E286156F800621B1B /* SRPPresenter.swift in Sources */,
 				E414264C286156E900621B1B /* SRPInteractor.swift in Sources */,
+				E4A978DE2862A3FF0063668D /* NetworkLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
