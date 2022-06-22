@@ -1,0 +1,50 @@
+name: SolidSample
+
+configs:
+    debug: debug
+    release: release
+ 
+targets:
+    SolidSample:
+        type: application
+        platform: iOS
+        deploymentTarget: 15.5
+        sources: [SolidSample]
+        settings:
+        base:
+            PRODUCT_NAME: Solid
+            PRODUCT_BUNDLE_IDENTIFIER: com.juan.solid-sample
+            INFOPLIST_FILE: SolidSample/Info.plist
+            MARKETING_VERSION: 1.0
+            SWIFT_VERSION: "5.0"
+            IPHONEOS_DEPLOYMENT_TARGET: 15.5
+            ENABLE_BITCODE: YES
+            SDKROOT: iphoneos
+            TARGET_DEVICE_FAMILY: "1"
+    SolidTests:
+            type: bundle.unit-test
+            platform: iOS
+            deploymentTarget: 15.5
+            dependencies:
+                - target: SolidSample
+            sources:
+                - path: SolidTests
+
+            info:
+                path: SolidTests/Info.plist
+            settings:
+                base:
+                    PRODUCT_NAME: $(TARGET_NAME)
+                    SWIFT_VERSION: "5.0"
+schemes:
+    SolidSample:
+        build:
+            targets:
+                SolidSample: all
+                SolidTests: [test]
+        test:
+            gatherCoverageData: true
+            coverageTargets:
+                - SolidSample
+            
+        
