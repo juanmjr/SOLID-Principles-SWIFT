@@ -97,6 +97,44 @@ It says that you should not modify your class inside. You should create extensio
 
 It doesn't mean extension in Swift! It's creating another abstraction and implementation for your problem without breaking the solution, using good practices for the acronym POP (protocol-oriented programming).
 
+```swift
+
+protocol IPrinter {
+    var logger: String { get }
+    func print() -> String
+}
+
+protocol ILog {
+    var log: IPrinter { get }
+    func execute()
+}
+
+struct Log: ILog {
+    var log: IPrinter
+    
+    func execute() {
+        print(log.print())
+    }
+}
+
+struct AnalyticsLog: IPrinter {
+    var logger: String
+    
+    func print() -> String {
+        return "I'm an Analytics Log - " + logger
+    }
+}
+
+struct NetworkLog: IPrinter {
+    var logger: String
+
+    func print() -> String {
+        return "I'm a Networking Log - " + logger
+    }
+}
+
+```
+
 #### Liskov Substitution Principle (LSP)
 
 It says that every part of parent's class inheritance by sub-classes must be used and cannot break them.
