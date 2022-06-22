@@ -147,7 +147,7 @@ struct NetworkLog: IPrinter {
 
 It says that every part of parent's class inheritance by sub-classes must be used and cannot break them.
 
-A simple easy example is a DOG class inheritances a CAT class, just because they both walk or whatever. It brings useless functions to subsclas and behaviors are totally different, which could presents system's flaw.
+A simple easy example is a DOG class inheritances a CAT class, just because they both walk or whatever. It brings useless functions to subsclass and behaviors are totally different, which could presents system's flaw.
  
 As a conclusion fact, Liskov Principle gives us an alert! Don't simple use a inheritance because it seens nice or you think reuse just some functions. Besides, be fascinate with usage of protocols and a good abstraction than inheritances.
 
