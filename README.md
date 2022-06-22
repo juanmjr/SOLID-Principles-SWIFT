@@ -1,3 +1,11 @@
+# Sample project execution
+
+You must install xcodegen to generate .xcodeproj to run the sample project. 
+
+More infos at: https://github.com/yonaskolb/XcodeGen
+
+Run cmd 'xcodegen' in terminal at root project folder.
+
 # S.O.L.I.D. 
 ### The Principles of acronym OOD (object-oriented design) by Robert C. Martin 
 
