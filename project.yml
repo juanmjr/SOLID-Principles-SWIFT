@@ -11,16 +11,16 @@ targets:
         deploymentTarget: 15.5
         sources: [SolidSample]
         settings:
-        base:
-            PRODUCT_NAME: Solid
-            PRODUCT_BUNDLE_IDENTIFIER: com.juan.solid-sample
-            INFOPLIST_FILE: SolidSample/Info.plist
-            MARKETING_VERSION: 1.0
-            SWIFT_VERSION: "5.0"
-            IPHONEOS_DEPLOYMENT_TARGET: 15.5
-            ENABLE_BITCODE: YES
-            SDKROOT: iphoneos
-            TARGET_DEVICE_FAMILY: "1"
+            base:
+                PRODUCT_NAME: Solid
+                PRODUCT_BUNDLE_IDENTIFIER: com.juan.solidsample
+                INFOPLIST_FILE: SolidSample/Info.plist
+                MARKETING_VERSION: 1.0
+                SWIFT_VERSION: "5.0"
+                IPHONEOS_DEPLOYMENT_TARGET: 15.5
+                ENABLE_BITCODE: YES
+                SDKROOT: iphoneos
+                TARGET_DEVICE_FAMILY: "1"
     SolidTests:
             type: bundle.unit-test
             platform: iOS
