@@ -12,7 +12,6 @@ protocol IMyViewController {
 }
 
 final class MyViewController: BaseViewController, IMyViewController {
-    
     func setup() {
         loadingIndicator = UIActivityIndicatorView(style: .large)
         loadingIndicator?.color = .red

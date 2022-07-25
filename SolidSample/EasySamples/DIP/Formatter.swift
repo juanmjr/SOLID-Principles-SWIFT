@@ -6,24 +6,25 @@
 //
 
 protocol IFormatterMask {
-    func format(input: String) -> String
+    func mask(input: String) -> String
 }
 
 protocol IFormatter {
     var formatter: IFormatterMask { get }
-    func execute(input: String) -> String
 }
 
-struct Formatter: IFormatter {
+typealias IFormatterChooser = IFormatterMask & IFormatter
+
+struct Formatter: IFormatterChooser {
     var formatter: IFormatterMask
     
-    func execute(input: String) -> String {
-        return formatter.format(input: input)
+    func mask(input: String) -> String {
+        return formatter.mask(input: input)
     }
 }
 
 struct FormatterNumber: IFormatterMask {
-    func format(input: String) -> String {
+    func mask(input: String) -> String {
         var result = input
         if input.count == 8 {
             result.insert("-", at: result.index(result.startIndex, offsetBy: 4))
@@ -33,7 +34,7 @@ struct FormatterNumber: IFormatterMask {
 }
 
 struct FormatterPhone: IFormatterMask {
-    func format(input: String) -> String {
+    func mask(input: String) -> String {
         var result = input
 
         if input.count == 9 {

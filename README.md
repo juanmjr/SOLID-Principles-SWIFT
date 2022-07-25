@@ -222,6 +222,44 @@ Segregation means part your interfaces into small sections of abstraction. Follo
 
 ```swift
 
+protocol IResultSuccess {
+    func successBlock()
+}
+
+protocol IResultErrorPersonNotFound {
+    func personNotFoundBlock()
+}
+
+protocol IResultErrorEmailNotFound {
+    func emailNotFoundBlock()
+}
+
+protocol IResultErrorDefault {
+    func defaultErrorBlock()
+}
+
+struct IJustWantSuccess: IResultSuccess {
+    func successBlock() {
+        print("Hey, I've got what you want :)")
+    }
+}
+
+struct IJustWantDefaultError: IResultErrorDefault {
+    func defaultErrorBlock() {
+        print("I'm a default error :)")
+    }
+}
+
+struct IJustWantErrors: IResultErrorPersonNotFound, IResultErrorEmailNotFound {
+    func personNotFoundBlock() {
+        print("The person was not found :(")
+    }
+    
+    func emailNotFoundBlock() {
+        print("Person`s e-mail was not found :(")
+    }
+}
+
 ```
 
 #### Dependency Inversion Principle (DIP)
@@ -235,24 +273,25 @@ Here, we can also see the pattern dependency injection, which could be implement
 ```swift
 
 protocol IFormatterMask {
-    func format(input: String) -> String
+    func mask(input: String) -> String
 }
 
 protocol IFormatter {
     var formatter: IFormatterMask { get }
-    func execute(input: String) -> String
 }
 
-struct Formatter: IFormatter {
+typealias IFormatterChooser = IFormatterMask & IFormatter
+
+struct Formatter: IFormatterChooser {
     var formatter: IFormatterMask
     
-    func execute(input: String) -> String {
-        return formatter.format(input: input)
+    func mask(input: String) -> String {
+        return formatter.mask(input: input)
     }
 }
 
 struct FormatterNumber: IFormatterMask {
-    func format(input: String) -> String {
+    func mask(input: String) -> String {
         var result = input
         if input.count == 8 {
             result.insert("-", at: result.index(result.startIndex, offsetBy: 4))
@@ -262,7 +301,7 @@ struct FormatterNumber: IFormatterMask {
 }
 
 struct FormatterPhone: IFormatterMask {
-    func format(input: String) -> String {
+    func mask(input: String) -> String {
         var result = input
 
         if input.count == 9 {
