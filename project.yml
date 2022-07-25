@@ -29,7 +29,6 @@ targets:
                 - target: SolidSample
             sources:
                 - path: SolidTests
-
             info:
                 path: SolidTests/Info.plist
             settings:
@@ -46,5 +45,3 @@ schemes:
             gatherCoverageData: true
             coverageTargets:
                 - SolidSample
-            
-        
