@@ -5,6 +5,7 @@ Instale o xcodegen para gerar o arquivo .xcodeproj para rodar o projeto exemplo.
 Rode o comando 'xcodegen' no terminal na pasta raiz do projeto exemplo (onde está o arquivo .yml).
 
 # Linguagens disponíveis
+
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/main/README.md)
 [![pt-br](https://img.shields.io/badge/lang-en-green.svg)](https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/main/README.pt-br.md)
 
