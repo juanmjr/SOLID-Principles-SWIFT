@@ -1,14 +1,12 @@
-[how-to](https://img.shields.io/badge/how--to-use-blue.svg)
+[![how-to](https://img.shields.io/badge/how--to-use-blue.svg)](https://github.com/yonaskolb/XcodeGen)
 
 You must install xcodegen to generate .xcodeproj to run the sample project. 
 
-More infos at: https://github.com/yonaskolb/XcodeGen
-
 Run cmd 'xcodegen' in terminal at root project sample folder (where .yml file is).
 
-# Multilanguag
+# Support languages
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/main/README.md)
-[![pt-br](https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/main/README.pt-br.md)
+[![pt-br](https://img.shields.io/badge/lang-en-green.svg)](https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/main/README.pt-br.md)
 
 # S.O.L.I.D. 
 
@@ -33,79 +31,79 @@ Systems present a nice clean code and turn an easy way to change and build throu
 It says that a class must have ONE reason to make something. That's why, you should have to think about to abstract responsibilities between your system's classes.
 
 ```swift
-protocol IBuyer {
-    func buy(crypto: ICripto, id: String)
+protocol BuyerProtocol {
+    func buy(crypto: CryptoProtocol, id: String)
 }
 
-protocol ISeller {
-    func sell(crypto: ICripto, id: String)
+protocol SellerProtocol {
+    func sell(crypto: CryptoProtocol, id: String)
 }
 
-protocol IExchange {
-    var wallets: [IWallet] { get }
-    func find(id: String) -> IWallet?
+protocol ExchangeProtocol {
+    var wallets: [WalletProtocol] { get }
+    func find(id: String) -> WalletProtocol?
 }
 
 // I'm an exchange and I only do operations Buy/Sell into a wallet list
-struct Exchange: IExchange, IBuyer, ISeller {
-    var wallets: [IWallet]
+final class Exchange: ExchangeProtocol, BuyerProtocol, SellerProtocol {
+    var wallets: [WalletProtocol]
     
-    init(wallets: [IWallet]) {
+    init(wallets: [WalletProtocol]) {
         self.wallets = wallets
     }
     
-    func find(id: String) -> IWallet? {
+    func find(id: String) -> WalletProtocol? {
         return wallets.first(where: {$0.id == id})
     }
 
-    func buy(crypto: ICripto, id: String) {
+    func buy(crypto: CryptoProtocol, id: String) {
         if var input = find(id: id) {
             input.add(crypto: crypto)
         }
     }
     
-    func sell(crypto: ICripto, id: String) {
+    func sell(crypto: CryptoProtocol, id: String) {
         if var input = find(id: id) {
             input.remove(crypto: crypto)
         }
     }
 }
 
-protocol IWallet {
+protocol WalletProtocol {
     var id: String { get }
     var cryptos: [ICripto] { get }
-    mutating func add(crypto: ICripto)
-    mutating func remove(crypto: ICripto)
+    func add(crypto: CryptoProtocol)
+    func remove(crypto: CryptoProtocol)
 }
 
 // I'm a wallet and I only know how to manage a crypto list.
-struct Wallet: IWallet {
+final class Wallet: WalletProtocol {
     var id: String
-    var cryptos: [ICripto]
+    var cryptos: [CryptoProtocol]
     
     init(id: String) {
         self.id = id
         self.cryptos = []
     }
     
-    mutating func add(crypto: ICripto) {
+    func add(crypto: CryptoProtocol) {
         cryptos.append(crypto)
     }
     
-    mutating func remove(crypto: ICripto) {
+    func remove(crypto: CryptoProtocol) {
         if let index = cryptos.firstIndex(where: {$0.id == crypto.id}) {
             cryptos.remove(at: index)
         }
     }
 }
 
-protocol ICripto {
+protocol CryptoProtocol {
     var id: String { get }
     var name: String { get }
 }
 
 // I'm a crypto model
-struct Crypto: ICripto {
+final class Crypto: CryptoProtocol {
     var id: String
     var name: String
 }
@@ -120,25 +118,25 @@ It doesn't mean extension in Swift! It's creating another abstraction and implem
 
 ```swift
 
-protocol IPrinter {
+protocol PrinterProtocol {
     var logger: String { get }
     func print() -> String
 }
 
-protocol ILog {
-    var log: IPrinter { get }
+protocol LogProtocol {
+    var log: PrinterProtocol { get }
     func execute()
 }
 
-struct Log: ILog {
-    var log: IPrinter
+final class Log: LogProtocol {
+    var log: PrinterProtocol
     
     func execute() {
         print(log.print())
     }
 }
 
-struct AnalyticsLog: IPrinter {
+final class AnalyticsLog: PrinterProtocol {
     var logger: String
     
     func print() -> String {
@@ -146,7 +144,7 @@ struct AnalyticsLog: IPrinter {
     }
 }
 
-struct NetworkLog: IPrinter {
+final class NetworkLog: PrinterProtocol {
     var logger: String
 
     func print() -> String {
@@ -168,18 +166,18 @@ As a conclusion fact, Liskov Principle gives us an alert! Don't simple use a inh
 
 import UIKit
 
-protocol IBaseLoading {
+protocol BaseLoadingProtocol {
     var loadingIndicator: UIActivityIndicatorView? { get }
     func showLoadingIndicator(view: UIView)
     func hideLoadingIndicator()
 }
 
-protocol IBaseNavigationProtocol {
+protocol BaseNavigationProtocol {
     var navigationTitle: String? { get }
     func setNavigation()
 }
 
-class BaseViewController: UIViewController, IBaseLoading, IBaseNavigationProtocol {
+class BaseViewController: UIViewController, BaseLoadingProtocol, BaseNavigationProtocol {
     var loadingIndicator: UIActivityIndicatorView?
     var navigationTitle: String?
     
@@ -205,11 +203,11 @@ class BaseViewController: UIViewController, IBaseLoading, IBaseNavigationProtoco
     }
 }
 
-protocol IMyViewController {
+protocol MyViewControllerProtocol {
     func setup()
 }
 
-final class MyViewController: BaseViewController, IMyViewController {
+final class MyViewController: BaseViewController, MyViewControllerProtocol {
     
     func setup() {
         loadingIndicator = UIActivityIndicatorView(style: .large)
@@ -235,35 +233,35 @@ Segregation means part your interfaces into small sections of abstraction. Follo
 
 ```swift
 
-protocol IResultSuccess {
+protocol ResultSuccessProtocol {
     func successBlock()
 }
 
-protocol IResultErrorPersonNotFound {
+protocol ResultErrorPersonNotFoundProtocol {
     func personNotFoundBlock()
 }
 
-protocol IResultErrorEmailNotFound {
+protocol ResultErrorEmailNotFoundProtocol {
     func emailNotFoundBlock()
 }
 
-protocol IResultErrorDefault {
+protocol ResultErrorDefaultProtocol {
     func defaultErrorBlock()
 }
 
-struct IJustWantSuccess: IResultSuccess {
+final class IJustWantSuccess: ResultSuccessProtocol {
     func successBlock() {
         print("Hey, I've got what you want :)")
     }
 }
 
-struct IJustWantDefaultError: IResultErrorDefault {
+final class IJustWantDefaultError: ResultErrorDefaultProtocol {
     func defaultErrorBlock() {
         print("I'm a default error :)")
     }
 }
 
-struct IJustWantErrors: IResultErrorPersonNotFound, IResultErrorEmailNotFound {
+final class IJustWantErrors: ResultErrorPersonNotFoundProtoco, ResultErrorEmailNotFoundProtocol {
     func personNotFoundBlock() {
         print("The person was not found :(")
     }
@@ -285,25 +283,25 @@ Here, we can also see the pattern dependency injection, which could be implement
 
 ```swift
 
-protocol IFormatterMask {
+protocol FormatterMaskProtocol {
     func mask(input: String) -> String
 }
 
-protocol IFormatter {
-    var formatter: IFormatterMask { get }
+protocol FormatterProtocol {
+    var formatter: FormatterMaskProtocol { get }
 }
 
-typealias IFormatterChooser = IFormatterMask & IFormatter
+typealias FormatterChooserProtocol = FormatterMaskProtocol & FormatterProtocol
 
-struct Formatter: IFormatterChooser {
-    var formatter: IFormatterMask
+final class Formatter: FormatterChooserProtocol {
+    var formatter: FormatterMaskProtocol
     
     func mask(input: String) -> String {
         return formatter.mask(input: input)
     }
 }
 
-struct FormatterNumber: IFormatterMask {
+final class FormatterNumber: FormatterMaskProtocol {
     func mask(input: String) -> String {
         var result = input
         if input.count == 8 {
@@ -313,7 +311,7 @@ struct FormatterNumber: IFormatterMask {
     }
 }
 
-struct FormatterPhone: IFormatterMask {
+final class FormatterPhone: FormatterMaskProtocol {
     func mask(input: String) -> String {
         var result = input
 
