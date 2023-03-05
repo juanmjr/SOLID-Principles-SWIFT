@@ -7,7 +7,16 @@ More infos at: https://github.com/yonaskolb/XcodeGen
 Run cmd 'xcodegen' in terminal at root project sample folder (where .yml file is).
 
 # S.O.L.I.D. 
-### The Principles of acronym OOD (object-oriented design) by Robert C. Martin 
+
+<p align="center">
+  <img src="https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/feature/solid-image/solid.png" />
+</p>
+
+<p align="center">
+   The Principles of acronym OOD (object-oriented design) by Robert C. Martin 
+</p>
+
+<br/>
 
 SOLID letters is a part of five principles, which puts your code on a high level. 
 
