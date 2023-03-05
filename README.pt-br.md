@@ -112,7 +112,7 @@ final class Crypto: CryptoProtocol {
 
 #### Princípio do Aberto e Fechado (OCP) 
 
-Ele diz que você não deve modificar sua classe dentro. Você deve criar extensões e alterá-las por fora.
+Diz que você não deve modificar sua classe dentro. Você deve criar extensões e alterá-las por fora.
 
 Não significa extensão em Swift! É criar outra abstração e implementação para o seu problema sem quebrar a solução, usando boas práticas da sigla POP (programação orientada a protocolo).
 
@@ -156,7 +156,7 @@ final class NetworkLog: PrinterProtocol {
 
 #### Liskov Substitution Principle (LSP)
 
-Ele diz que todas as partes da herança de classe do pai por subclasses devem ser usadas e não podem quebrá-las.
+Diz que todas as partes da herança de classe do pai por subclasses devem ser usadas e não podem quebrá-las.
 
 Um exemplo simples e fácil é que uma classe DOG herda uma classe CAT, apenas porque ambos andam ou algo assim. Ele traz funções inúteis para a subclasse e os comportamentos são totalmente diferentes, o que pode apresentar falha no sistema.
  
