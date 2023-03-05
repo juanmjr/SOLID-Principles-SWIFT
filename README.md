@@ -6,7 +6,7 @@ Run cmd 'xcodegen' in terminal at root project sample folder (where .yml file is
 
 # Support languages
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/main/README.md)
-[![pt-br](https://img.shields.io/badge/lang-en-green.svg)](https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/main/README.pt-br.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/juanmjr/SOLID-Principles-SWIFT/blob/main/README.pt-br.md)
 
 # S.O.L.I.D. 
 
